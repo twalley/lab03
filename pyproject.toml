@@ -1,0 +1,39 @@
+[project]
+# название проекта
+name = "lab03"
+version = "0.1.0"
+description = "Каталог авиационных деталей - Лабораторная работа 3"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+# библиотеки для разработки (тесты, линтеры, проверка типов)
+dev = ["pytest", "ruff", "mypy", "pre-commit"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# настройки для поиска пакетов (указываем, что код лежит в папке src)
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# настройки для тестов (pytest)
+[tool.pytest.ini_options]
+testpaths = ["tests"] # где лежат тесты
+pythonpath = ["src"] # откуда импортировать код
+addopts = "-ra -q" # -ra показывает все результаты тестов, -q делает вывод тише
+
+# настройки для проверки типов (mypy)
+[tool.mypy]
+mypy_path = "src" # где mypy должен искать код для проверки
+
+# настройки для линтера и форматировщика (ruff)
+[tool.ruff]
+line-length = 100 # максимальная длина строки
+target-version = "py312" # версия Python, под которую пишем код
+
+[tool.ruff.lint]
+# какие правила проверять: 
+# E - ошибки стиля (PEP 8), F - ошибки логики (неиспользуемые переменные), I - сортировка импортов
+select = ["E", "F", "I"] 
